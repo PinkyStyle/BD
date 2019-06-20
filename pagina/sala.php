@@ -1,12 +1,45 @@
-<?php
-// Conectando y seleccionado la base de datos  
-$dbconn = pg_connect("host=localhost dbname=Hospital user=postgres password=xd123")
-    or die('No se ha podido conectar: ' . pg_last_error());
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title><?php echo $title; ?></title>
+        <link rel="stylesheet" type="text/css" href="Styles/Estilo.css" />
+    </head>
+    <body>
+        <div id="estructura">
+            <div id="banner">
+                
+                
+            </div>
+            
+            <nav id="navegar">
+                <ul id="nav" >
+                    <li><a href="index.php"> Home </a> </li>
+                    <li><a href="index.php"> Empleados </a> </li>
+                    <li><a href="index.php"> Pacientes </a> </li>
+                    <li><a href="sala.php"> Salas </a> </li>
+                    <li><a href="cama.php"> Cama </a> </li>
+                    
+                </ul>
+                
+                
+            </nav>
+            
+            <div id="contenido">
+                <?php echo 
+                
+                
+                
+//empieza codigo HTML
+$title = "Salas";
+    
+$dbconn = pg_connect("host=localhost dbname=BD user=postgres password=recajetilla3")
+or die('No se ha podido conectar: ' . pg_last_error());
 
 // Realizando una consulta SQL
 $query = 'SELECT * FROM sala';
 $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
-
 // Imprimiendo los resultados en HTML
 echo "<table>\n";
 	 echo "<tr>
@@ -52,5 +85,28 @@ pg_free_result($result);
 pg_close($dbconn);
 echo "
 <a href='nueva_sala.php'>Insertar sala</a>
-";
+"; ?> 
+
+                
+                
+
+
+
+ </div>
+            
+             <div id="barra">
+                
+                
+            </div>
+            
+            <footer> 
+                <p> Grupo 9 Base de Datos 2019 @ Todos los derechos reservados </p>
+                 </footer> 
+                   
+        </div>
+           
+    </body>
+</html>
+
+include 'Template.php'
 ?>

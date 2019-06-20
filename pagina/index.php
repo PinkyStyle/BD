@@ -1,10 +1,17 @@
 <?php  
 $title = "Home";
-$content = "Bienvenidos al sitio web oficial del Hospital General. \n"
-        . "En este sitio podrá acceder a la información almacenada de nuestros empleados, pacientes, salas, etc.\n"
-        . "                                                "
-        . "Esta aplicación web es un proyecto desarrollado por el grupo 9 del curso de Base de Datos 2019";
+$content =  "Bienvenidos al sitio web oficial del Hospital General <p>
+Este sitio es un proyecto desarrollado por el Grupo 9 del curso de Bases de Datos 2019-1.
+</p>
+<p>
+Este sitio está sujeto a cambios y puede presentar algunos problemas visuales.
+</p>" ;
+
+
+
 
 include 'Template.php'
 
+
 ?>
+
