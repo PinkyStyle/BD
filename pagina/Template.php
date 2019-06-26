@@ -20,10 +20,9 @@ and open the template in the editor.
             <nav id="navegar">
                 <ul id="nav" >
                     <li><a href="index.php"> Home </a> </li>
-                    <li><a href="index.php"> Empleados </a> </li>
-                    <li><a href="index.php"> Pacientes </a> </li>
                     <li><a href="sala.php"> Salas </a> </li>
                     <li><a href="cama.php"> Cama </a> </li>
+		    <li><a href="hospitalizacion.php"> Hospitalizaciones </a> </li>
                     
                 </ul>
                 

@@ -3,7 +3,7 @@
 
 $hospitalizacion = $_GET["hospitalizacion"];
 // Conectando y seleccionado la base de datos  
-$dbconn = pg_connect("host=localhost dbname=hospital user=postgres password=123456")
+$dbconn = pg_connect("host=localhost dbname=BD user=postgres password=recajetilla3")
     or die('No se ha podido conectar: ' . pg_last_error());
 
 // Realizando una consulta SQL
