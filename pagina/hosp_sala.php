@@ -1,17 +1,16 @@
 <?php
 
-
-$cama = $_GET["cama"];
 // Conectando y seleccionado la base de datos  
 $dbconn = pg_connect("host=localhost dbname=BD user=postgres password=recajetilla3")
     or die('No se ha podido conectar: ' . pg_last_error());
 
 // Realizando una consulta SQL
-$query = 'SELECT DISTINCT tieneAsignada.refCama, tieneAsignada.refHosp, cama.ubicacion, sala.nombre, hospitalizacion.fecha_asignacion, hospitalizacion.fecha_salida FROM cama
-INNER JOIN tieneAsignada ON cama.id = tieneAsignada.refCama  
+$query = 'SELECT tabla.ubicacion, tabla.nombre, COUNT(tabla.refHosp) FROM (SELECT DISTINCT tieneAsignada.refCama, tieneAsignada.refHosp, cama.ubicacion, sala.nombre, hospitalizacion.fecha_asignacion, hospitalizacion.fecha_salida FROM cama
+INNER JOIN tieneAsignada ON cama.id = tieneAsignada.refCama
 INNER JOIN sala ON cama.ubicacion = sala.numero
-INNER JOIN hospitalizacion ON tieneAsignada.refHosp = hospitalizacion.id
-WHERE cama.id = '.$cama;
+INNER JOIN hospitalizacion ON tieneAsignada.refHosp = hospitalizacion.id) as tabla
+GROUP BY tabla.ubicacion, tabla.nombre
+ORDER BY tabla.ubicacion';
 
 $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 
@@ -23,12 +22,9 @@ $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 
 echo "<table>\n";
 	 echo "<tr>
-		<th>Cama</th>
-		<th>Hopsitalizacion</th>
 		<th>Numero sala</th>
 		<th>Nombre sala</th>
-		<th>Fecha asignacion</th>
-		<th>Fecha salida</th>
+		<th>Numero hospitalizaciones</th>
 
 	  </tr>";
     echo "\t<tr>\n";
@@ -46,4 +42,5 @@ pg_free_result($result);
 
 // Cerrando la conexión
 pg_close($dbconn);
+
 ?>

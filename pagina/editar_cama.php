@@ -1,5 +1,4 @@
 <?php
-$numero =$_GET["numero"];
 
 
 // Conectando y seleccionado la base de datos  
@@ -7,7 +6,7 @@ $dbconn = pg_connect("host=localhost dbname=BD user=postgres password=recajetill
     or die('No se ha podido conectar: ' . pg_last_error());
 
 
-$query = "SELECT * FROM sala WHERE numero=$numero";
+$query = "SELECT * FROM cama WHERE ID='1'";
   $result = pg_query($dbconn, $query);
   if (!$result) {
 	echo "Error while executing the query: " . $query;
@@ -16,16 +15,14 @@ $query = "SELECT * FROM sala WHERE numero=$numero";
   $row = pg_fetch_array ($result);
   if($row)
 	{
-	$nombre = $row['nombre'];
-
-	$cant_camas  = $row['cant_camas'];
+	$ubicacion = $row['ubicacion'];
+	$ID = $row['id'];
 	
 	echo "
 	
-	<form action='guardar_editar_sala.php' method='get'>
-	  <p>Numero: <input type='text' name='numero'  value='".$numero."'/></p>
-	 <p>Nombre: <input type='text' name='nombre'  value='".$nombre."'/></p>
-	 <p>Camas: <input type='number' name='camas'  value='".$cant_camas."'/></p>
+	<form action='guardar_editar_cama.php' method='get'>
+	  <p>ID: <input type='text' name='ID'  value='".$ID."'/></p>
+	 <p>Ubicacion: <input type='text' name='ubicacion'  value='".$ubicacion."'/></p>
 	 <p><input type='submit' /></p>
 
 </form>
@@ -52,18 +49,7 @@ pg_free_result($result);
 // Cerrando la conexión
 pg_close($dbconn);
 
+
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 

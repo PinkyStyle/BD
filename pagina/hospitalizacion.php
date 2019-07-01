@@ -9,7 +9,7 @@ $dbconn = pg_connect("host=localhost dbname=BD user=postgres password=recajetill
 
 // Realizando una consulta SQL
 $query = 'SELECT DISTINCT tieneAsignada.refCama, tieneAsignada.refHosp, cama.ubicacion, sala.nombre, hospitalizacion.fecha_asignacion, hospitalizacion.fecha_salida FROM cama
-INNER JOIN tieneAsignada ON cama.id = tieneAsignada.refCama
+INNER JOIN tieneAsignada ON cama.id = tieneAsignada.refCama  
 INNER JOIN sala ON cama.ubicacion = sala.numero
 INNER JOIN hospitalizacion ON tieneAsignada.refHosp = hospitalizacion.id';
 
@@ -19,6 +19,22 @@ $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 
 
 // Imprimiendo los resultados en HTML
+
+
+echo "<table class ='table table-striped table-dark'>\n";
+	 echo "<thead class='thead-dark'>
+		<th>Cama</th>
+		<th>Hospitalizacion</th>
+		<th>Numero sala</th>
+		<th>Nombre sala</th>
+		<th>Fecha asignacion</th>
+		<th>Fecha salida</th>
+
+	  </thead>
+	  <tbody>";
+    echo "\t<tr>\n";
+
+
   $row = pg_fetch_array ($result);
   if($row)
 	{
@@ -63,21 +79,14 @@ $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 
 </form>
 
+<form action='except_hosp.php' method='get'>
+	<p>Hospitalizaciones excepto: <input type='text' name='hospitalizacion' class= 'form-control' /></p>
+	 <p><input type='submit'class='btn btn btn-primary' /></p>
+
+</form>
+
 	";
 	}
-
-echo "<table class ='table table-striped table-dark'>\n";
-	 echo "<thead class='thead-dark'>
-		<th>Cama</th>
-		<th>Hospitalizacion</th>
-		<th>Numero sala</th>
-		<th>Nombre sala</th>
-		<th>Fecha asignacion</th>
-		<th>Fecha salida</th>
-
-	  </thead>
-	  <tbody>";
-    echo "\t<tr>\n";
 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
 
     foreach ($line as $col_value) {
@@ -86,7 +95,6 @@ while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
     echo "\t</tr></tbody>\n";
 }
 echo "</table>\n";
-
 // Liberando el conjunto de resultados
 pg_free_result($result);
 

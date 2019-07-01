@@ -4,5 +4,4 @@
  <p>Ubicacion: <input type="text" name="Ubicacion" /></p>
  <p><input type="submit" /></p>
  
-
 </form>

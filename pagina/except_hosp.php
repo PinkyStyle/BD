@@ -1,7 +1,7 @@
 <?php
 
 
-$sala = $_GET["sala"];
+$hospitalizacion = $_GET["hospitalizacion"];
 // Conectando y seleccionado la base de datos  
 $dbconn = pg_connect("host=localhost dbname=BD user=postgres password=recajetilla3")
     or die('No se ha podido conectar: ' . pg_last_error());
@@ -11,7 +11,13 @@ $query = 'SELECT DISTINCT tieneAsignada.refCama, tieneAsignada.refHosp, cama.ubi
 INNER JOIN tieneAsignada ON cama.id = tieneAsignada.refCama  
 INNER JOIN sala ON cama.ubicacion = sala.numero
 INNER JOIN hospitalizacion ON tieneAsignada.refHosp = hospitalizacion.id
-WHERE sala.numero = '.$sala;
+EXCEPT
+SELECT DISTINCT tieneAsignada.refCama, tieneAsignada.refHosp, cama.ubicacion, sala.nombre, hospitalizacion.fecha_asignacion, hospitalizacion.fecha_salida FROM cama
+INNER JOIN tieneAsignada ON cama.id = tieneAsignada.refCama  
+INNER JOIN sala ON cama.ubicacion = sala.numero
+INNER JOIN hospitalizacion ON tieneAsignada.refHosp = hospitalizacion.id
+WHERE hospitalizacion.id = '.$hospitalizacion;
+
 
 $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 
@@ -46,4 +52,5 @@ pg_free_result($result);
 
 // Cerrando la conexión
 pg_close($dbconn);
+
 ?>

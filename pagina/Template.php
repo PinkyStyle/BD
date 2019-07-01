@@ -22,7 +22,9 @@ and open the template in the editor.
                     <li><a href="index.php"> Home </a> </li>
                     <li><a href="sala.php"> Salas </a> </li>
                     <li><a href="cama.php"> Cama </a> </li>
-		    <li><a href="hospitalizacion.php"> Hospitalizaciones </a> </li>
+					
+					<li><a href="hosp_sala.php"> Hosp-sala </a> </li>
+					<li><a href="hospitalizacion.php"> Hospitalizaciones </a> </li>
                     
                 </ul>
                 

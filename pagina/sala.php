@@ -54,7 +54,10 @@ pg_free_result($result);
 pg_close($dbconn);
 echo "
 <a href='nueva_sala.php'>Insertar sala</a>
-"; ?> 
+"; 
+
+
+?> 
 
                 
                 

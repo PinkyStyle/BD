@@ -46,6 +46,7 @@ pg_close($dbconn);
 echo "
 <a href='nueva_cama.php'>Insertar cama</a>
 ";
+
  ?> 
                
                 
